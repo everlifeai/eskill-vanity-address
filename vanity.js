@@ -1,37 +1,32 @@
 const StellarSdk = require('stellar-sdk');
-const pkg = require('./package.json');
 
 //This method generates random stellar address till the suffix word matches
-function getRandomKeyPair(cb){
+function getRandomKeyPair(suffix_word, cb){
 	
 	const pair = StellarSdk.Keypair.random();
 	
 	const publicKey = pair.publicKey();
   
   	//Checks if the public key ends with the suffix word
-  	if (suffix_word && publicKey.endsWith(suffix_word)) {
-   		console.log('Public: ', pair.publicKey());
-    	console.log('Secret: ', pair.secret());
-        
-        cb([pair.publicKey(),pair.secret()])
-    	//Array of Key Pair is returned
+  	if (suffix_word && publicKey.endsWith(suffix_word)) {        
+		//Array of Key Pair is returned
+		console.log(`public key: ${pair.publicKey}`)
+		cb([pair.publicKey(),pair.secret()])
+    	
   	}else{
 		  cb()
 	  }
 }
-function generateVanityStellarAddress(suffix_word,cb) {
-	
-		getRandomKeyPair((data)=>{
-			if(data) cb(data)
+
+module.exports.generateVanityStellarAddress = function(suffix_word, cb) {
+	let keyPair
+	while (!keyPair){	
+		getRandomKeyPair(suffix_word,(data)=>{
+			keyPair = data
 		});
+		if(keyPair) break
+	}
+	cb(keyPair)
 }
 
-let suffix_word='EV'
-let keyPair
-while (!keyPair){
-	generateVanityStellarAddress(suffix_word,(data)=>{
-		keyPair = data
-	});
-	if(keyPair) break
-}
-console.log(keyPair)
+

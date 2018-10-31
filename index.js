@@ -45,6 +45,7 @@ function registerWithCommMgr() {
     })
 }
 
+let currentVanity
 function startMicroservice() {
 
     /*      understand/
@@ -64,15 +65,12 @@ function startMicroservice() {
     stellarVanityAddressSvc.on('msg', (req, cb) => {
         if(askedForService) {
             askedForService = false
-            cb(null, true)
-            suffix_word = req.msg
-            stellar_vanity.generateVanityStellarAddress(suffix_word,(data)=>{
-                sendReply(data)
-	            console.log(data)
-            });
+            let suffix_word = req.msg
 
-            
-                
+            stellar_vanity.generateVanityStellarAddress(suffix_word,(data)=>{
+                cb(null, true)
+                sendReply(data,req)
+            })
         } else {
             if(req.msg.toLowerCase().startsWith("/stellar-vanity-address")) {
                 askedForService = true
@@ -89,6 +87,6 @@ function startMicroservice() {
  * We keep context here - if the user has asked for our service or not.
  * TODO: Save state in leveldb service
  */
-let askedForService;
+let askedForService = false;
 main()
 
