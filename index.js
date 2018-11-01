@@ -39,6 +39,7 @@ function registerWithCommMgr() {
     commMgrClient.send({
         type: 'register-msg-handler',
         mskey: msKey,
+        mshelp: [{cmd:'/stellar_vanity_address',txt: 'Find a stellar vanity address'}],
         mstype: 'msg',
     }, (err) => {
         if(err) u.showErr(err)
@@ -72,14 +73,14 @@ function startMicroservice() {
                 sendReply(data,req)
             })
         } else {
-            if(req.msg.toLowerCase().startsWith("/stellar-vanity-address")) {
+            if(req.msg.toLowerCase() == "/stellar_vanity_address") {
                 askedForService = true
                 cb(null, true)
                 sendReply("What word should the stellar address end with?", req)
             } else {
                 cb()
             }
-		}
+        }
     })
 
 }
