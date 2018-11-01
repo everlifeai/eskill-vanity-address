@@ -67,15 +67,14 @@ function startMicroservice() {
         if(askedForService) {
             askedForService = false
             let suffix_word = req.msg
-
-            stellar_vanity.generateVanityStellarAddress(suffix_word,(data)=>{
-                cb(null, true)
-                sendReply(data,req)
+            cb(null, true)
+            stellar_vanity.generateVanityStellarAddress(suffix_word,(err, data)=>{
+                if(err) sendReply(err, req)
+                else sendReply(data,req)
             })
         } else {
             if(req.msg.toLowerCase() == "/stellar_vanity_address") {
                 askedForService = true
-                cb(null, true)
                 sendReply("What word should the stellar address end with?", req)
             } else {
                 cb()
