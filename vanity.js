@@ -13,12 +13,14 @@ function getRandomKeyPair(suffix_word, cb) {
 
 module.exports.generateVanityStellarAddress = function(suffix_word, cb) {
     if(!suffix_word) cb(`Error - no word found to search for!`)
-    search_for_keypair_1()
+    search_for_keypair_1(suffix_word, cb)
 
-    function search_for_keypair_1() {
+    function search_for_keypair_1(suffix_word, cb) {
         getRandomKeyPair(suffix_word, (data) => {
             if(data) cb(null, data)
-            else search_for_keypair_1()
+            else process.nextTick(() => {
+                search_for_keypair_1(suffix_word, cb)
+            })
         })
     }
 }
