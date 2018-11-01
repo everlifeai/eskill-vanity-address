@@ -13,6 +13,7 @@ function getRandomKeyPair(suffix_word, cb) {
 
 module.exports.generateVanityStellarAddress = function(suffix_word, cb) {
     if(!suffix_word) cb(`Error - no word found to search for!`)
+    suffix_word = suffix_word.toUpperCase()
     search_for_keypair_1(suffix_word, cb)
 
     function search_for_keypair_1(suffix_word, cb) {
