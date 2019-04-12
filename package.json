@@ -1,6 +1,6 @@
 {
   "name": "stellar-vanity-address",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Stellar Vanity Address Generation Skill",
   "main": "index.js",
   "author": "aroysbox@gmail.com",
