@@ -1,5 +1,5 @@
 {
-  "name": "stellar-vanity-address",
+  "name": "eskill-vanity-address",
   "version": "1.0.0",
   "description": "Stellar Vanity Address Generation Skill",
   "main": "index.js",
