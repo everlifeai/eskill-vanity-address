@@ -1,6 +1,6 @@
 'use strict'
 const cote = require('cote')
-const u = require('elife-utils')
+const u = require('@elife/utils')
 var stellar_vanity = require('./vanity');
 
 /*      understand/
