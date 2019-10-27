@@ -6,8 +6,6 @@
   "author": "aroysbox@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "cote": "^0.17.1",
-    "elife-utils": "everlifeai/elife-utils",
     "stellar-sdk": "^0.8.0"
   }
 }
