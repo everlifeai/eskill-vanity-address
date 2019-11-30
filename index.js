@@ -15,7 +15,7 @@ function main() {
 }
 
 const commMgrClient = new cote.Requester({
-    name: 'Calculator -> CommMgr',
+    name: 'Vanity Address Generator -> CommMgr',
     key: 'everlife-communication-svc',
 })
 
